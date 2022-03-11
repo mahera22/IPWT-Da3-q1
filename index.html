@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doctor’s Appointment</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        outline: none;
+    }
+    form {
+        font-weight: bold;
+        margin: 20px;
+        border: 2px solid black;
+        border-radius: 10px;
+        padding-left: 100px;
+        padding-right: 100px;
+        padding:10px;
+        float:left;
+     }
+    form div{
+        margin: 10px;
+    }
+    form div input{
+        width:200px;
+        background-color: rgb(33, 102, 148);
+    }
+    input[type="submit"]{
+        font-size: 20px;
+        background-color:blueviolet;
+        width:200px;
+        height:40px;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <form>
+        <div>
+            <label for="name">NAME</label>
+            <input type="text" id="name">
+        </div>
+        <div>
+        <label for="age">AGE</label>
+        <input type="text" id="age">
+        </div>
+        <div>
+            <label for="age">GENDER</label>
+            <input type="text" id="gender">
+        </div>
+        <div>
+            <label for="visits">NO OF VISITS</label>
+            <input type="text" id="visits">
+        </div>
+        <div>
+            <label for="date">APOINTMENT DATE</label>
+            <input type="date" id="date">
+        </div>
+        <div>
+            <label for="department">DEPARTMENT</label>
+            <input type="text" id="department">
+        </div>
+        <input type="submit" onclick="myFunction()">
+    </form>
+</body>
+<script>
+    function myFunction() {
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        let gender = document.getElementById("gender").value.toLowerCase();
+        let visits = document.getElementById("visits").value;
+        let date = new Date(document.getElementById("date").value);
+        let department = document.getElementById("department").value.toLowerCase();
+        try{
+            if (!name) {
+                throw "Name must be given";
+            }
+            if (isNaN(age)) {
+                throw "age must be number";
+            }
+            if (Number(age) < 0) {
+                throw "age must be greater than 0";
+            }
+            if (isNaN(visits)) {
+                throw "visits must be a number";
+            }
+            if (Number(visits) < 0) {
+                throw "visits must be greater than 0";
+            }
+            var l = new Date('2020-1-5'); 
+            var u = new Date('2020-1-31');
+            if (date.getTime() >= l.getTime() && date.getTime() <= u.getTime()) {
+                throw "Doctor on vacation";
+            }
+            var genders = ["male", "female", "m", "f", "others", "F", "M", "Female", "Male"];
+            if (!genders.includes(gender)) {
+                throw "choose gender from male , female , others ."
+            }
+            var dept = ["paediatrician", "ophthalmology", "cardiac", "dental", "Paediatrician", "Ophthalmology", "Cardiac", "Dental"];
+            if (!dept.includes(department)){
+                throw "Deparment is incorrect";
+            }
+            alert("Succesfully booked an apointment");
+        } catch (err) {
+            alert(err);
+        }
+    }
+</script>
+</html>
